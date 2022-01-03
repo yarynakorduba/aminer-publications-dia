@@ -1,0 +1,5 @@
+variable,data_type
+id,Integer
+cited_by_count,Integer
+publication_venue_id,Integer
+year,Integer

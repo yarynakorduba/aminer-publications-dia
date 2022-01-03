@@ -1,0 +1,4 @@
+variable,data_type
+id,Integer
+paper_id,Integer
+paper_count,Integer

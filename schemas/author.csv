@@ -1,0 +1,64 @@
+variable,data_type
+id,Integer
+paper_id,Integer
+paper_count,Integer
+citation_count,Integer
+h_index,Integer
+
+
+
+list_get = lambda l, x, d=None: d if not l[x:x+1] else l[x] # safe getter of list values
+
+paper_keys = ["#index", "#*", "#@", "#o", "#t", "#c", "#%", "#!"]
+author_keys = ["#index", "#n", "#a", "#pc", "#cn", "#hi", "#pi", "#upi", "#t"]
+
+AUTHOR_KEYS_MAP = {
+    "#index": "id", "#n": "name", "#a": "affiliations", "#pc": "paper_count", "#cn": "citation_count", "#t": "research_interests"
+}
+
+with open('./assets/parsedData/authors.csv', 'w', encoding='utf8', newline='') as output_file:
+    fc = csv.DictWriter(output_file, fieldnames=author_keys)
+    fc.writeheader()
+#     fc.writerows(mappedPaperDicts.collect())
+
+def splitIntoKeyValue(stringToSplit):
+    if type(stringToSplit) is str:
+        if len(stringToSplit) > 0:
+            stringToSplit = stringToSplit.split(" ", 1)
+            mappedKey = AUTHOR_KEYS_MAP[list_get(splittedA, 0)]
+            if (mappedKey):
+                stringToSplit = { mappedKey: list_get(splittedA, 1, '') }
+            else:
+                stringToSplit = {}
+        else:
+            stringToSplit = {}
+    return stringToSplit
+
+def reduceFeaturesToDict(featureA={}, featureB=''):
+    try:
+        splittedA = splitIntoKeyValue(featureA)
+        splittedB = splitIntoKeyValue(featureB)
+#         featureA;
+#         if type(splittedA) is str:
+#             if len(splittedA) > 0:
+#                 splittedA = splittedA.split(" ", 1)
+#                 mappedKey = AUTHOR_KEYS_MAP[list_get(splittedA, 0)]
+#                 if (mappedKey):
+#                     splittedA = { mappedKey: list_get(splittedA, 1, '') }
+#                 else:
+#                     splittedA = {}
+#             else:
+#                 splittedA = {}
+
+#         splittedB = featureB;
+#         if type(featureB) is str:
+#             if len(featureB) > 0:
+#                 splittedB = featureB.split(" ", 1)
+#                 splittedB = { list_get(splittedB, 0): list_get(splittedB, 1, '') }
+#             else:
+#                 splittedB = {}
+#         if 
+        return { **splittedA, **splittedB }
+    except:
+        print("ERROR: ", featureA, featureB)
+        raise
