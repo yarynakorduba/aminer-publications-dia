@@ -5,8 +5,3 @@ paper_count,Integer
 citation_count,Integer
 h_index,Integer
 
-dtypes = pd.read_csv('schema.csv').to_records().tolist()
-fields = [T.StructField(dtype[0], globals()) for dtype in dtypes]
-schema = StructType(fields)
-
-df = spark.read.csv('data.csv', header=True, schema=schema)
