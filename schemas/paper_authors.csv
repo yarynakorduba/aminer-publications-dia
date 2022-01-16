@@ -1,3 +1,3 @@
 variable,data_type
-affiliations,String
+authors,String
 paper_id,Integer

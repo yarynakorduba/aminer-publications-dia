@@ -1,5 +1,5 @@
 variable,data_type
-id,Integer
-cited_by_count,Integer
-publication_venue_id,Integer
+paper_id,Integer
+ref_ids,String
+title,String
 year,Integer

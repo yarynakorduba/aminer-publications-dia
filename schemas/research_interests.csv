@@ -1,0 +1,3 @@
+variable,data_type
+author_id,Integer
+research_interests,String
