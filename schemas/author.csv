@@ -1,6 +1,7 @@
 variable,data_type
-name,String
-paper_count,Integer
+author_id,Integer
 citation_count,Integer
 h_index,Integer
+name,String
+paper_count,Integer
 
