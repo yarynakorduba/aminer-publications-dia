@@ -12,3 +12,4 @@ def createDFFromFileAndSchema(sparkSession, filePath, schemaPath):
     schema = StructType(fields)
     created_df = sparkSession.read.option('header', 'true').csv(filePath, header=True, schema=schema)
     return created_df
+
