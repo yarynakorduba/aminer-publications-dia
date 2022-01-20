@@ -12,3 +12,22 @@ def createDFFromFileAndSchema(sparkSession, filePath, schemaPath):
     schema = StructType(fields)
     created_df = sparkSession.read.option('header', 'true').csv(filePath, header=True, schema=schema)
     return created_df
+
+
+def clean_special_letters(df, column):
+    df = df.withColumn(column, translate(column, 'íîìïīį', 'i'))
+    df = df.withColumn(column, translate(column, 'ÎÏÍĪĮÌ', 'I'))
+    df = df.withColumn(column, translate(column, 'àáâäæãåā', 'a'))
+    df = df.withColumn(column, translate(column, 'ÀÁÂÄÆÃÅĀ', 'A'))
+    df = df.withColumn(column, translate(column, 'èéêëēėę', 'e'))
+    df = df.withColumn(column, translate(column, 'ÈÉÊËĒĖĘ', 'E'))
+    df = df.withColumn(column, translate(column, 'ûüùúū', 'u'))
+    df = df.withColumn(column, translate(column, 'ÛÜÙÚŪ', 'U'))
+    df = df.withColumn(column, translate(column, 'ÔÖÒÓŒØŌÕ', 'O'))
+    df = df.withColumn(column, translate(column, 'Ÿ', 'Y'))
+
+    return df
+
+def clean_special_character(df, column):
+    df = df.withColumn(column,translate(column , '\";:\}\{\~\/', ''))
+    return df
