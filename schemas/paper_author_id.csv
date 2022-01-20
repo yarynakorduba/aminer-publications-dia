@@ -2,4 +2,4 @@ variable,data_type
 index,Integer
 author_id,Integer
 paper_id,Integer
-author_position,String
+author_position,Integer
