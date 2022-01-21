@@ -34,7 +34,7 @@ def saveDFIntoCSVFolder(df, folderName, pathToFolder):
 
 def moveFileToCorrectFolder(folderName, pathToFolder):
     filename = glob.glob(f'{pathToFolder}{folderName}/*.csv')[0]
-    shutil.move(filename, f'{pathToFolder}{folderName}_ds.csv')
+    shutil.move(filename, f'{pathToFolder}{folderName}.csv')
 
 
 def clean_special_letters(df, column):
