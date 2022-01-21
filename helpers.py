@@ -29,5 +29,9 @@ def clean_special_letters(df, column):
     return df
 
 def clean_special_character(df, column):
-    df = df.withColumn(column,translate(column , '\";:\}\{\~\/', ''))
+    df = df.withColumn(column,translate(column , '\";:\}\{\~\/%)(&#\'$', ''))
+    return df
+
+def clean_numbers_from_text(df, column):
+    df = df.withColumn(column,regexp_replace(column , "/[0-9]+/", ''))
     return df
