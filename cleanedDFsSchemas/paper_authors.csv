@@ -1,0 +1,7 @@
+variable,data_type
+name,String
+paper_id,Integer
+author_id,Integer
+citation_count,Integer
+h_index,Integer
+paper_count,Integer

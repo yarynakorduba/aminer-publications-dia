@@ -1,0 +1,4 @@
+variable,data_type
+paper_id,Integer
+title,String
+year,Integer
