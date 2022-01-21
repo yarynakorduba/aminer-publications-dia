@@ -1,9 +1,11 @@
-"""This file contains all functions used in the load_csv_into_schema file """
+"""This file contains the helper functions """
+import glob
+import shutil
 import pandas as pd
 from pyspark.sql.types import *
 from pyspark.sql.functions import *
 
-def createDFFromFileAndSchema(sparkSession, filePath, schemaPath):
+def createDFFromFileAndSchema(sparkSession, filePath, schemaPath, delimiter=',', header=True):
     """
     This function is used to write the csv into a schema
     :param sparkSession:
@@ -17,8 +19,22 @@ def createDFFromFileAndSchema(sparkSession, filePath, schemaPath):
     print(f"Types from schema: {dtypes}")
     fields = [StructField(dtype[0], globals()[f'{dtype[1]}Type']()) for dtype in dtypes]
     schema = StructType(fields)
-    created_df = sparkSession.read.option('header', 'true').csv(filePath, header=True, schema=schema)
+    created_df = sparkSession.read \
+        .option('header', 'true') \
+        .option('delimiter', delimiter) \
+        .csv(filePath, header=header, schema=schema)
     return created_df
+
+def saveDFIntoCSVFolder(df, folderName, pathToFolder):
+    # Save data to csv file
+    df.coalesce(1) \
+        .write.format("com.databricks.spark.csv") \
+        .option("header", "true") \
+        .save(f'{pathToFolder}{folderName}')
+
+def moveFileToCorrectFolder(folderName, pathToFolder):
+    filename = glob.glob(f'{pathToFolder}{folderName}/*.csv')[0]
+    shutil.move(filename, f'{pathToFolder}{folderName}_ds.csv')
 
 
 def clean_special_letters(df, column):
@@ -60,3 +76,4 @@ def clean_numbers_from_text(df, column):
     """
     df = df.withColumn(column, translate(column , '0123456789', ''))
     return df
+
