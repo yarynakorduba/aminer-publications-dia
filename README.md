@@ -19,7 +19,7 @@ The goal of this project is to process and train the scientific publications dat
 * Aminer-Author.txt
 * Aminer-Paper.txt
 * Aminer-Author2Paper.txt (Supplementary File)
-3. Data is parsed using spark into csv file format. `parse_data.ipynb`
+3. Data is parsed using pyspark into csv file format. `parse_data.ipynb`
 4. The parsed data is cleaned using pyspark for consolidation and name disambiguation. The supplementary file 
    `Aminer-Author2Paper.txt` is used to perform data cleaning between the papers and authors datasets. `load_csv_into_schema.csv`
 5. The following queries are performed: `load_csv_into_schema.csv`
@@ -55,5 +55,8 @@ finished running.
 **2) Model Training and Evaluation**
 
 Everything that we managed to do regarding this part can be found in `make_prediction.ipynb`.
-We already did an analysis of the second time but did not manage to do a lot of progress in actually implementing 
+We already did an analysis of the second task but did not manage to do a lot of progress in actually implementing 
 and testing it.
+
+
+P.s: During the time worked for this project, 10 kg of clementines were eaten and liters of coffee were drank. No animals were harmed! :") 
