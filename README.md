@@ -1,5 +1,5 @@
 # DILA AMiner Publications Project
-_Hello! :) We are Lisbora (SEM) and Yaryna (CS), this is our project submission for DILA exercise. We are both following 
+_Hello! :) We are Lisbora Likaj (SEM) and Yaryna Korduba (CS), this is our project submission for DILA exercise. We are both following 
 our first master semester at TuGraz and are very excited to get to know more about the field of Data Science. This is our
 very first Data Science related project, so we are aware that the solutions found for the task are not the most optimal ones.
 Besides the struggles , we were very excited during the whole project and learnt a lot about data processing, cleaning and queries.
@@ -59,4 +59,6 @@ We already did an analysis of the second task but did not manage to do a lot of 
 and testing it.
 
 
-P.s: During the time worked for this project, 10 kg of clementines were eaten and liters of coffee were drank. No animals were harmed! :") 
+
+
+**P.s: During the time worked for this project, 10 kg of clementines were eaten and liters of coffee were drank. No animals were harmed! :")**
