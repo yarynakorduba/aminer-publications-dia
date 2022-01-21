@@ -1,11 +1,18 @@
-import pyspark
+"""This file contains all functions used in the load_csv_into_schema file """
 import pandas as pd
 from pyspark.sql.types import *
 from pyspark.sql.functions import *
 
 def createDFFromFileAndSchema(sparkSession, filePath, schemaPath):
+    """
+    This function is used to write the csv into a schema
+    :param sparkSession:
+    :param filePath: the path of the csv file
+    :param schemaPath: the path of the schema
+    :return: dataframe
+    """
     print(f"File path: {filePath}, schema path: {schemaPath}")
-    ### load schema
+    # load schema
     dtypes = pd.read_csv(schemaPath).to_records(index=False).tolist()
     print(f"Types from schema: {dtypes}")
     fields = [StructField(dtype[0], globals()[f'{dtype[1]}Type']()) for dtype in dtypes]
@@ -15,6 +22,12 @@ def createDFFromFileAndSchema(sparkSession, filePath, schemaPath):
 
 
 def clean_special_letters(df, column):
+    """
+    This function is used to clean columns of the dataframe from special letters
+    :param df: dataframe
+    :param column: column_name
+    :return: cleaned dataframe
+    """
     df = df.withColumn(column, translate(column, 'íîìïīį', 'i'))
     df = df.withColumn(column, translate(column, 'ÎÏÍĪĮÌ', 'I'))
     df = df.withColumn(column, translate(column, 'àáâäæãåā', 'a'))
@@ -29,9 +42,21 @@ def clean_special_letters(df, column):
     return df
 
 def clean_special_character(df, column):
-    df = df.withColumn(column,translate(column , '\";:\}\{\~\/%)(&#\'$', ''))
+    """
+    This function is used to clean columns of the dataframe from special characters
+    :param df: dataframe
+    :param column: column_name
+    :return: cleaned dataframe
+    """
+    df = df.withColumn(column,translate(column , '\";:\}\{\~\/%)(&#\'$?`-.', ''))
     return df
 
 def clean_numbers_from_text(df, column):
-    df = df.withColumn(column,regexp_replace(column , "/[0-9]+/", ''))
+    """
+    This function is used to clean specific columns of the dataframe from numbers
+    :param df: dataframe
+    :param column: column_name
+    :return: cleaned dataframe
+    """
+    df = df.withColumn(column, translate(column , '0123456789', ''))
     return df
