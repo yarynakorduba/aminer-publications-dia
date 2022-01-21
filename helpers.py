@@ -26,13 +26,26 @@ def createDFFromFileAndSchema(sparkSession, filePath, schemaPath, delimiter=',',
     return created_df
 
 def saveDFIntoCSVFolder(df, folderName, pathToFolder):
-    # Save data to csv file
+    """
+    This function is used to save data to csv file
+    :param df: dataframe
+    :param folderName: name of the folder
+    :param pathToFolder: path
+    :return:
+    """
+
     df.coalesce(1) \
         .write.format("com.databricks.spark.csv") \
         .option("header", "true") \
         .save(f'{pathToFolder}{folderName}')
 
 def moveFileToCorrectFolder(folderName, pathToFolder):
+    """
+    This function is used to move the csv files to the correct respective folders
+    :param folderName: folder name
+    :param pathToFolder: folder path
+    :return:
+    """
     filename = glob.glob(f'{pathToFolder}{folderName}/*.csv')[0]
     shutil.move(filename, f'{pathToFolder}{folderName}.csv')
 
